@@ -3,7 +3,9 @@ package com.example.qaptive;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
@@ -18,12 +20,15 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
+import java.security.acl.Group;
+
 
 public class MainActivity extends AppCompatActivity {
 
     private EditText mName, mEmail , mUsername, mPass, mPhone;
     private TextView mTextView;
     private Button signUpBtn;
+    Context context;
 
     private FirebaseAuth mAuth;
     
@@ -39,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
         mPhone = findViewById(R.id.phone);
         mTextView = findViewById(R.id.signuplink);
         signUpBtn = findViewById(R.id.signupbtn);
+
 
         mAuth = FirebaseAuth.getInstance();
 
