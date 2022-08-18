@@ -36,10 +36,17 @@ public class MainActivity extends AppCompatActivity {
         mUsername = findViewById(R.id.user_name);
         mPass = findViewById(R.id.password);
         mPhone = findViewById(R.id.phone);
-        mTextView = findViewById(R.id.textView);
+        mTextView = findViewById(R.id.signuplink);
         signUpBtn = findViewById(R.id.signupbtn);
 
         mAuth = FirebaseAuth.getInstance();
+
+        mTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this , SigninActivity.class));
+            }
+        });
 
         signUpBtn.setOnClickListener(new View.OnClickListener() {
             @Override
