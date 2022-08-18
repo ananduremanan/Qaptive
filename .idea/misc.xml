@@ -3,7 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Studio_Projects/Qaptive/app/src/main/res/drawable/btn_shape.xml" value="0.2265" />
+        <entry key="..\:/Studio_Projects/Qaptive/app/src/main/res/drawable/edit_shape.xml" value="0.2265" />
+        <entry key="..\:/Studio_Projects/Qaptive/app/src/main/res/layout/activity_homeactivity.xml" value="0.2" />
         <entry key="..\:/Studio_Projects/Qaptive/app/src/main/res/layout/activity_main.xml" value="0.2" />
+        <entry key="..\:/Studio_Projects/Qaptive/app/src/main/res/layout/activity_signin.xml" value="0.2" />
       </map>
     </option>
   </component>
