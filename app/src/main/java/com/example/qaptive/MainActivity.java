@@ -4,9 +4,11 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -33,12 +35,17 @@ public class MainActivity extends AppCompatActivity {
     private Button signUpBtn;
     Context context;
 
+    private BroadcastReceiver MyReceiver = null;
+
     private FirebaseAuth mAuth;
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        MyReceiver = new MyReceiver();
+        broadcastIntent();
 
         if(!isConnected(MainActivity.this)) buildDialog(MainActivity.this).show();
         else {
@@ -71,6 +78,11 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
+
+    private void broadcastIntent() {
+        registerReceiver(MyReceiver, new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
+    }
+
     private void createUser()
     {
         String name = mName.getText().toString();
@@ -151,5 +163,10 @@ public class MainActivity extends AppCompatActivity {
         });
 
         return builder;
+    }
+    @Override
+    protected void onPause() {
+        super.onPause();
+        unregisterReceiver(MyReceiver);
     }
 }
