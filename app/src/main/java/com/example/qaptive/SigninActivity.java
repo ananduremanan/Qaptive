@@ -3,7 +3,10 @@ package com.example.qaptive;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.BroadcastReceiver;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
@@ -24,10 +27,15 @@ public class SigninActivity extends AppCompatActivity {
     private Button signInBtn;
     private FirebaseAuth mAuth;
 
+    private BroadcastReceiver MyReceiver = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signin);
+
+        MyReceiver = new MyReceiver();
+        broadcastIntent();
 
         mEmail = findViewById(R.id.emailsignin);
         mPass = findViewById(R.id.passwordsignin);
@@ -49,6 +57,11 @@ public class SigninActivity extends AppCompatActivity {
         });
 
     }
+
+    private void broadcastIntent() {
+        registerReceiver(MyReceiver, new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
+    }
+
     private void loginUser(){
         String email = mEmail.getText().toString();
         String pass = mPass.getText().toString();
@@ -78,5 +91,9 @@ public class SigninActivity extends AppCompatActivity {
             mEmail.setError("Pleas Enter Correct Email");
         }
     }
-
+    @Override
+    protected void onPause() {
+        super.onPause();
+        unregisterReceiver(MyReceiver);
+    }
 }
